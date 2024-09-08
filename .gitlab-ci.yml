@@ -20,8 +20,4 @@ memcheck-job:
     - shared
   image: gcc:latest
   script:
-    - valgrind --leak-check=yes slist
-  artifacts:
-    paths:
-      - ./slist
-    expire_in: "7 days"
+    - valgrind --leak-check=yes slist | tee > result.txt
