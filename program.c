@@ -23,6 +23,11 @@ int main(int argc, char** argv){
         if(option == 1){
             student *stu = CreateStudent();
             printf("%s, %s\n", stu->firstname, stu->lastname);
+            free(stu->firstname);
+            free(stu->lastname);
+            free(stu->next);
+            free(stu->prev);
+            free(stu->year);
             free(stu);
             stu = NULL;
         }
