@@ -2,8 +2,10 @@ stages:
   - build
   - valgrind
 
-build:
-  tags: [shared]
+build-job:
+  stage: build
+  tags:
+    - shared
   image: gcc:latest
   script:
     - make slist
