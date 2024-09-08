@@ -22,4 +22,8 @@ memcheck-job:
   script:
     - apt update
     - apt-get install -y valgrind
-    - valgrind --leak-check=yes ./slist | tee > result.txt
+    - valgrind --leak-check=yes ./slist | tee > memcheckresult.txt
+  artifacts:
+    paths:
+      - ./memcheckresult.txt
+    expire_in: "7 days"
