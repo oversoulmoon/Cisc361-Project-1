@@ -18,4 +18,4 @@ void AppendStudent(student *list, student *addition);
 void PrintStudent(student *list, Direction d);
 void DeleteLastname(student *list);
 void DeallocateStudent(student *stu);
-void DeallocateStudentList(student *list);
+void DeallocateStudentList(student **list);

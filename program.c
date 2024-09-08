@@ -24,15 +24,39 @@ int main(int argc, char** argv){
         temp = NULL;
 
         if(option == 1){
-            if(list == NULL){
-                list = CreateStudent();
-            }else{
-                AppendStudent(list,CreateStudent());
-            }
+            list == NULL ? list = CreateStudent() :AppendStudent(list,CreateStudent());
         }else if (option == 3){
+            DeallocateStudentList(&list);
             PrintStudent(list, FORWARD);
         }
     }
+
+
+}
+void DeallocateStudentList(student **list){
+    if (*list != NULL){
+        student* temp = *list;
+        *list = (*list)->next;
+        DeallocateStudent(temp);
+        temp = NULL;
+        DeallocateStudentList(list);
+    }
+}
+void DeallocateStudent(student *stu){
+    free(stu->firstname);
+    free(stu->lastname);
+    free(stu->year);
+    if (stu->next == NULL && stu->next == NULL){
+
+    }else if(stu->prev == NULL){
+        stu->next->prev = NULL;
+    }else if (stu->prev == NULL ){
+        stu->prev->next = NULL;
+    }else{
+        stu->prev->next = stu->next;
+        stu->next->prev = stu->prev;
+    }
+    free(stu);
 }
 
 void AppendStudent(student *list, student *addition){
@@ -79,6 +103,7 @@ student * CreateStudent(){
 
     return stu;
 }
+
 char *AskUserInput(){
     char *buffer = (char*) malloc(BUFFERSIZE);
     int len;
