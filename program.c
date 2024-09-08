@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,6 +10,8 @@
 int main(int argc, char** argv){
     int option = 0;
     char * temp;
+    student *list = NULL;
+    int len = 0;
     while (option != 5){
         printf("1. add an student to the end of the list after prompting for all the student's data \n"
                 "2. delete all students with a given last name from the list (pay particular attention to what happens if you delete the first or last student!) \n"
@@ -21,16 +24,19 @@ int main(int argc, char** argv){
         temp = NULL;
 
         if(option == 1){
-            student *stu = CreateStudent();
-            printf("%s, %s\n", stu->firstname, stu->lastname);
-            free(stu->firstname);
-            free(stu->lastname);
-            free(stu->next);
-            free(stu->prev);
-            free(stu->year);
-            free(stu);
-            stu = NULL;
+            AppendStudent(list, CreateStudent());
         }
+    }
+}
+
+void AppendStudent(student *list, student *addition){
+    if (list == NULL){
+        list = addition;
+    }else if (list->next != NULL){
+        return AppendStudent(list->next,  addition);
+    }else if (list->next == NULL){
+        list->next = addition;
+        addition->prev = list->next;
     }
 }
 
