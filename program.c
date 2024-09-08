@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "program.h"
 int main(){
     printf("1. add an student to the end of the list after prompting for all the student's data \n"

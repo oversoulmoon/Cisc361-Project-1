@@ -8,6 +8,9 @@ typedef struct student {
   struct student *prev;
 } student;
 
+// For automated valgrind tests using gitlab CI/CD
+void AutomatedRunThrough();
+
 typedef enum {
     FORWARD,
     BACKWARD
