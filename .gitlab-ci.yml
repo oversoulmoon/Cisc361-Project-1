@@ -20,4 +20,5 @@ memcheck-job:
     - shared
   image: gcc:latest
   script:
+    - apt-get install valgrind
     - valgrind --leak-check=yes slist | tee > result.txt
