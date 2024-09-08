@@ -1,0 +1,13 @@
+stages:
+  - build
+  - valgrind
+
+build:
+  tags: [shared]
+  image: gcc:latest
+  script:
+    - make slist
+  artifacts:
+    paths:
+      - ./slist
+    expire_in: "7 days"
