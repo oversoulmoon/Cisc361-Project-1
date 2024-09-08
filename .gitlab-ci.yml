@@ -13,3 +13,15 @@ build-job:
     paths:
       - ./slist
     expire_in: "7 days"
+
+memcheck-job:
+  stage: valgrind
+  tags:
+    - shared
+  image: gcc:latest
+  script:
+    - valgrind --leak-check=yes slist
+  artifacts:
+    paths:
+      - ./slist
+    expire_in: "7 days"
