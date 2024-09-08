@@ -9,56 +9,66 @@
 int main(int argc, char** argv){
     int option = 0;
     char * temp;
-    student *list = NULL;
     int len = 0;
+    student *list = NULL;
     while (option != 5){
-        printf("1. add an student to the end of the list after prompting for all the student's data \n"
-                "2. delete all students with a given last name from the list (pay particular attention to what happens if you delete the first or last student!) \n"
-                "3. print the list from beginning to end \n"
-                "4. print the list from end to beginning \n"
-                "5. exit the program. \n" );
+        printf("1: add "
+                "2: delete "
+                "3: print "
+                "4: rprint "
+                "5.: exit " );
+        printf("Choice: \n");
         temp = AskUserInput();
         option = strtol(temp, NULL, 10);
         free(temp);
         temp = NULL;
 
         if(option == 1){
-            AppendStudent(list, CreateStudent());
+            if(list == NULL){
+                list = CreateStudent();
+            }else{
+                AppendStudent(list,CreateStudent());
+            }
+        }else if (option == 3){
+            PrintStudent(list, FORWARD);
         }
     }
 }
 
 void AppendStudent(student *list, student *addition){
-    if (list == NULL){
-        list = addition;
-    }else if (list->next != NULL){
+    if (list->next != NULL){
         return AppendStudent(list->next,  addition);
     }else if (list->next == NULL){
         list->next = addition;
-        addition->prev = list->next;
+        addition->prev = list;
     }
 }
-
+void PrintStudent(student *list, Direction d){
+    if(list != NULL){
+        printf("%s, %s ID %ld %s Grad in %d\n", list->lastname,list->firstname, list->studentID, list->year, list->expectedGraduation);
+        PrintStudent(list->next, d);
+    }
+}
 student * CreateStudent(){
     student *stu = (student*) malloc(sizeof(student));
     char * temp;
 
-    printf("Enter Student Last Name: \n");
+    printf("last_name: ");
     stu->lastname = AskUserInput();
 
-    printf("Enter Student First Name: \n");
+    printf("first_name: ");
     stu->firstname = AskUserInput();
 
-    printf("Enter Student ID: \n");
+    printf("ID: ");
     temp = AskUserInput();
     stu->studentID = strtol(temp, NULL, 10);
     free(temp);
     temp = NULL;
 
-    printf("Enter Student Year Status (freshman, etc...): \n");
+    printf("class: ");
     stu->year = AskUserInput();
 
-    printf("Enter Student Expected Gradutation Year: \n");
+    printf("year: ");
     temp = AskUserInput();
     stu->expectedGraduation = strtol(temp, NULL, 10);
     free(temp);
