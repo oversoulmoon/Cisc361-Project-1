@@ -7,16 +7,25 @@
 #define BUFFERSIZE 1024
 
 int main(int argc, char** argv){
-    if (argc == 1){
+    int option = 0;
+    char * temp;
+    while (option != 5){
         printf("1. add an student to the end of the list after prompting for all the student's data \n"
                 "2. delete all students with a given last name from the list (pay particular attention to what happens if you delete the first or last student!) \n"
                 "3. print the list from beginning to end \n"
                 "4. print the list from end to beginning \n"
                 "5. exit the program. \n" );
+        temp = AskUserInput();
+        option = strtol(temp, NULL, 10);
+        free(temp);
+        temp = NULL;
 
-    }else{
-        CreateStudent();
-    }
+        if(option == 1){
+            student *stu = CreateStudent();
+            printf("%s, %s\n", stu->firstname, stu->lastname);
+            free(stu);
+            stu = NULL;
+        }
 }
 
 student * CreateStudent(){
