@@ -16,24 +16,31 @@ int main(int argc, char** argv){
                 "2:del\t"
                 "3:prnt\t"
                 "4:rprt\t"
-                "5:exit\t" );
-        printf("Choice: \n");
+                "5:exit\n" );
         temp = AskUserInput();
         option = strtol(temp, NULL, 10);
         free(temp);
         temp = NULL;
 
         if(option == 1){
+            printf("Choice:Appending\n");
             AppendStudent(&list,CreateStudent());
         }else if(option ==2){
-            printf("Deleting: ");
+            printf("choice:last name to delete: ");
+            char* lastname = AskUserInput();
             DeleteLastname(&list, AskUserInput());
+            printf("Deleting: %s\n", lastname);
+            free(lastname);
+            lastname = NULL;
         }else if (option == 3){
+            printf("Choice:Printing\n");
             PrintStudent(list, FORWARD);
         }else if (option == 4){
+            printf("Choice:Reverse printing\n");
             PrintStudent(list, BACKWARD);
         }
     }
+    printf("choice:Exiting\n");
     if(list != NULL){
         DeallocateStudentList(&list);
     }
@@ -101,12 +108,11 @@ void AppendStudent(student **list, student *addition){
 void PrintStudent(student *list, Direction d){
     if(list != NULL){
         if (d == FORWARD){
-            // printf("%s, %s ID %ld %s Grad in %d\n", list->lastname,list->firstname, list->studentID, list->year, list->expectedGraduation);
-            // printf("%d", list->next == NULL);
+            printf("%s, %s\tID %ld\t%s\tGraduating in %d\n", list->lastname,list->firstname, list->studentID, list->year, list->expectedGraduation);
             PrintStudent(list->next, d);
         }else{
             PrintStudent(list->next, d);
-            printf("%s, %s ID %ld %s Grad in %d\n", list->lastname,list->firstname, list->studentID, list->year, list->expectedGraduation);
+            printf("%s, %s\tID %ld\t%s\tGraduating in %d\n", list->lastname,list->firstname, list->studentID, list->year, list->expectedGraduation);
         }
     }
 }
