@@ -12,11 +12,11 @@ int main(int argc, char** argv){
     int len = 0;
     student *list = NULL;
     while (option != 5){
-        printf("1: add "
-                "2: delete "
-                "3: print "
-                "4: rprint "
-                "5.: exit " );
+        printf("1:add\t"
+                "2:del\t"
+                "3:prnt\t"
+                "4:rprt\t"
+                "5:exit\t" );
         printf("Choice: \n");
         temp = AskUserInput();
         option = strtol(temp, NULL, 10);
@@ -26,14 +26,17 @@ int main(int argc, char** argv){
         if(option == 1){
             AppendStudent(&list,CreateStudent());
         }else if(option ==2){
-
+            printf("Deleting: ");
+            DeleteLastname(&list, AskUserInput());
         }else if (option == 3){
             PrintStudent(list, FORWARD);
         }else if (option == 4){
             PrintStudent(list, BACKWARD);
         }
     }
-    DeallocateStudentList(&list);
+    if(list != NULL){
+        DeallocateStudentList(&list);
+    }
 }
 
 void DeallocateStudentList(student **list){
@@ -45,16 +48,37 @@ void DeallocateStudentList(student **list){
         DeallocateStudentList(list);
     }
 }
+void DeleteLastname(student **list, char* lastname){
+    if((*list) != NULL){
+        if(strcmp((*list)->lastname, lastname) == 0){
 
+            student *temp = *list;
+            student *next = (*list)->next;
+            DeallocateStudent(temp);
+            temp = NULL;
+
+            if ((*list)->prev == NULL){
+                *list = next;
+                DeleteLastname(list, lastname);
+            }else{
+                DeleteLastname(&next, lastname);
+            }
+        }else{
+            student *next = (*list)->next;
+            DeleteLastname(&next, lastname);
+        }
+    }
+}
 void DeallocateStudent(student *stu){
+    // printf("%s", stu->firstname);
     free(stu->firstname);
     free(stu->lastname);
     free(stu->year);
-    if (stu->next == NULL && stu->next == NULL){
+    if (stu->prev == NULL && stu->next == NULL){
 
     }else if(stu->prev == NULL){
         stu->next->prev = NULL;
-    }else if (stu->prev == NULL ){
+    }else if (stu->next == NULL ){
         stu->prev->next = NULL;
     }else{
         stu->prev->next = stu->next;
@@ -77,7 +101,8 @@ void AppendStudent(student **list, student *addition){
 void PrintStudent(student *list, Direction d){
     if(list != NULL){
         if (d == FORWARD){
-            printf("%s, %s ID %ld %s Grad in %d\n", list->lastname,list->firstname, list->studentID, list->year, list->expectedGraduation);
+            // printf("%s, %s ID %ld %s Grad in %d\n", list->lastname,list->firstname, list->studentID, list->year, list->expectedGraduation);
+            // printf("%d", list->next == NULL);
             PrintStudent(list->next, d);
         }else{
             PrintStudent(list->next, d);

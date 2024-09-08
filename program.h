@@ -16,6 +16,6 @@ typedef enum {
 student * CreateStudent();
 void AppendStudent(student **list, student *addition);
 void PrintStudent(student *list, Direction d);
-void DeleteLastname(student *list);
+void DeleteLastname(student **list, char* lastname);
 void DeallocateStudent(student *stu);
 void DeallocateStudentList(student **list);
