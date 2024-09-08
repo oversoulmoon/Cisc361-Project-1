@@ -25,8 +25,12 @@ int main(int argc, char** argv){
 
         if(option == 1){
             AppendStudent(&list,CreateStudent());
+        }else if(option ==2){
+
         }else if (option == 3){
             PrintStudent(list, FORWARD);
+        }else if (option == 4){
+            PrintStudent(list, BACKWARD);
         }
     }
     DeallocateStudentList(&list);
@@ -72,8 +76,13 @@ void AppendStudent(student **list, student *addition){
 
 void PrintStudent(student *list, Direction d){
     if(list != NULL){
-        printf("%s, %s ID %ld %s Grad in %d\n", list->lastname,list->firstname, list->studentID, list->year, list->expectedGraduation);
-        PrintStudent(list->next, d);
+        if (d == FORWARD){
+            printf("%s, %s ID %ld %s Grad in %d\n", list->lastname,list->firstname, list->studentID, list->year, list->expectedGraduation);
+            PrintStudent(list->next, d);
+        }else{
+            PrintStudent(list->next, d);
+            printf("%s, %s ID %ld %s Grad in %d\n", list->lastname,list->firstname, list->studentID, list->year, list->expectedGraduation);
+        }
     }
 }
 
