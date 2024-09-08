@@ -14,7 +14,7 @@ typedef enum {
     BACKWARD
 }Direction;
 student * CreateStudent();
-void AppendStudent(student *list, student *addition);
+void AppendStudent(student **list, student *addition);
 void PrintStudent(student *list, Direction d);
 void DeleteLastname(student *list);
 void DeallocateStudent(student *stu);

@@ -24,7 +24,7 @@ int main(int argc, char** argv){
         temp = NULL;
 
         if(option == 1){
-            list == NULL ? list = CreateStudent() :AppendStudent(list,CreateStudent());
+            AppendStudent(&list,CreateStudent());
         }else if (option == 3){
             DeallocateStudentList(&list);
             PrintStudent(list, FORWARD);
@@ -59,12 +59,14 @@ void DeallocateStudent(student *stu){
     free(stu);
 }
 
-void AppendStudent(student *list, student *addition){
-    if (list->next != NULL){
-        return AppendStudent(list->next,  addition);
-    }else if (list->next == NULL){
-        list->next = addition;
-        addition->prev = list;
+void AppendStudent(student **list, student *addition){
+    if (*list == NULL){
+        *list = addition;
+    }else if ((*list)->next != NULL){
+        return AppendStudent(&(*list)->next,  addition);
+    }else if ((*list)->next == NULL){
+        (*list)->next = addition;
+        addition->prev = *list;
     }
 }
 void PrintStudent(student *list, Direction d){
