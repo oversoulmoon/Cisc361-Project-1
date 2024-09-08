@@ -8,9 +8,13 @@ typedef struct student {
   struct student *prev;
 } student;
 
+typedef enum {
+    FORWARD,
+    BACKWARD
+}Direction;
 student * CreateStudent();
 void AppendStudent(student *list, student *addition);
-void PrintStudent(student *list, bool foward);
+void PrintStudent(student *list, Direction d);
 void DeleteLastname(student *list);
 void DeallocateStudent(student *stu);
 void DeallocateStudentList(student *list);
