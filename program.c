@@ -26,6 +26,7 @@ int main(int argc, char** argv){
             free(stu);
             stu = NULL;
         }
+    }
 }
 
 student * CreateStudent(){
