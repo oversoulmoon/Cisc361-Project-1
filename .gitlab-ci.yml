@@ -22,7 +22,7 @@ memcheck-job:
   script:
     - apt update
     - apt-get install -y valgrind
-    - valgrind --leak-check=yes ./slist | tee > memcheckresult.txt
+    - valgrind --leak-check=yes ./slist < test | tee > memcheckresult.txt
   artifacts:
     paths:
       - ./memcheckresult.txt
