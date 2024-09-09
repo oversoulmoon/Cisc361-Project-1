@@ -60,17 +60,17 @@ void DeleteLastname(student **list, char* lastname){
         if(strcmp((*list)->lastname, lastname) == 0){
 
             student *temp = *list;
+            int isLast = (*list)->prev == NULL;
             student *next = (*list)->next;
+            DeallocateStudent(temp);
+            temp = NULL;
 
-            if ((*list)->prev == NULL){
+            if (isLast){
                 *list = next;
                 DeleteLastname(list, lastname);
             }else{
                 DeleteLastname(&next, lastname);
             }
-
-            DeallocateStudent(temp);
-            temp = NULL;
         }else{
             student *next = (*list)->next;
             DeleteLastname(&next, lastname);
