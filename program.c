@@ -61,8 +61,6 @@ void DeleteLastname(student **list, char* lastname){
 
             student *temp = *list;
             student *next = (*list)->next;
-            DeallocateStudent(temp);
-            temp = NULL;
 
             if ((*list)->prev == NULL){
                 *list = next;
@@ -70,6 +68,9 @@ void DeleteLastname(student **list, char* lastname){
             }else{
                 DeleteLastname(&next, lastname);
             }
+
+            DeallocateStudent(temp);
+            temp = NULL;
         }else{
             student *next = (*list)->next;
             DeleteLastname(&next, lastname);
