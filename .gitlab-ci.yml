@@ -14,8 +14,9 @@ build-job:
     paths:
       - ./slist
     expire_in: "7 days"
+
 test-job:
-  stage: build
+  stage: test
   tags:
     - shared
   image: gcc:latest
@@ -25,6 +26,7 @@ test-job:
     paths:
       - ./tests
     expire_in: "7 days"
+
 memcheck-job:
   stage: valgrind
   tags:
