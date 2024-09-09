@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
   - valgrind
 
 build-job:
@@ -13,7 +14,17 @@ build-job:
     paths:
       - ./slist
     expire_in: "7 days"
-
+test-job:
+  stage: build
+  tags:
+    - shared
+  image: gcc:latest
+  script:
+    - make tests
+  artifacts:
+    paths:
+      - ./tests
+    expire_in: "7 days"
 memcheck-job:
   stage: valgrind
   tags:
@@ -22,7 +33,9 @@ memcheck-job:
   script:
     - apt update
     - apt-get install -y valgrind
-    - valgrind --leak-check=yes ./slist < test | tee > memcheckresult.txt
+    - valgrind --leak-check=yes ./slist < ./tests/test1 | tee >> memcheckresult.txt
+    - valgrind --leak-check=yes ./slist < ./tests/test2 | tee >> memcheckresult.txt
+    - valgrind --leak-check=yes ./slist < ./tests/test3 | tee >> memcheckresult.txt
   artifacts:
     paths:
       - ./memcheckresult.txt
