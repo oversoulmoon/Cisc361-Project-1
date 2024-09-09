@@ -12,8 +12,8 @@ int main(int argc, char** argv){
     int len = 0;
     student *list = NULL;
     while (option != 5){
-        printf("1:add\t"
-                "2:del\t"
+        printf("1:add \t"
+                "2:del \t"
                 "3:prnt\t"
                 "4:rprt\t"
                 "5:exit\n" );
@@ -23,20 +23,20 @@ int main(int argc, char** argv){
         temp = NULL;
 
         if(option == 1){
-            printf("Choice:Appending\n");
+            printf("choice:Appending\n");
             AppendStudent(&list,CreateStudent());
         }else if(option ==2){
             printf("choice:last name to delete: ");
             char* lastname = AskUserInput();
-            DeleteLastname(&list, AskUserInput());
+            DeleteLastname(&list, lastname);
             printf("Deleting: %s\n", lastname);
             free(lastname);
             lastname = NULL;
         }else if (option == 3){
-            printf("Choice:Printing\n");
+            printf("choice:Printing\n");
             PrintStudent(list, FORWARD);
         }else if (option == 4){
-            printf("Choice:Reverse printing\n");
+            printf("choice:Reverse printing\n");
             PrintStudent(list, BACKWARD);
         }
     }
@@ -121,22 +121,22 @@ student * CreateStudent(){
     student *stu = (student*) malloc(sizeof(student));
     char * temp;
 
-    printf("last_name: ");
+    printf("last name: ");
     stu->lastname = AskUserInput();
 
-    printf("first_name: ");
+    printf("first name: ");
     stu->firstname = AskUserInput();
 
-    printf("ID: ");
+    printf("id number: ");
     temp = AskUserInput();
     stu->studentID = strtol(temp, NULL, 10);
     free(temp);
     temp = NULL;
 
-    printf("class: ");
+    printf("classification: ");
     stu->year = AskUserInput();
 
-    printf("year: ");
+    printf("grad year: ");
     temp = AskUserInput();
     stu->expectedGraduation = strtol(temp, NULL, 10);
     free(temp);
