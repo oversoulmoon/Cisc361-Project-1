@@ -121,12 +121,22 @@ void PrintStudent(student *list, Direction d){
 student * CreateStudent(){
     student *stu = (student*) malloc(sizeof(student));
     char * temp;
-
+    int len;
     printf("last name: ");
-    stu->lastname = AskUserInput();
+    temp = AskUserInput();
+    len =strlen(temp);
+    stu->lastname = (char*) malloc(len);
+    strcpy(stu->lastname, temp);
+    free(temp);
+    temp = NULL;
 
     printf("first name: ");
-    stu->firstname = AskUserInput();
+    temp = AskUserInput();
+    len =strlen(temp);
+    stu->firstname = (char*) malloc(len);
+    strcpy(stu->firstname, temp);
+    free(temp);
+    temp = NULL;
 
     printf("id number: ");
     temp = AskUserInput();
@@ -135,7 +145,12 @@ student * CreateStudent(){
     temp = NULL;
 
     printf("classification: ");
-    stu->year = AskUserInput();
+    temp = AskUserInput();
+    len =strlen(temp);
+    stu->year = (char*) malloc(len);
+    strcpy(stu->year, temp);
+    free(temp);
+    temp = NULL;
 
     printf("grad year: ");
     temp = AskUserInput();
