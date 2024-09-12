@@ -122,9 +122,10 @@ student * CreateStudent(){
     student *stu = (student*) malloc(sizeof(student));
     char * temp;
     int len;
+
     printf("last name: ");
     temp = AskUserInput();
-    len =strlen(temp);
+    len = strlen(temp) + 1;
     stu->lastname = (char*) malloc(len);
     strcpy(stu->lastname, temp);
     free(temp);
@@ -132,7 +133,7 @@ student * CreateStudent(){
 
     printf("first name: ");
     temp = AskUserInput();
-    len =strlen(temp);
+    len =strlen(temp) + 1;
     stu->firstname = (char*) malloc(len);
     strcpy(stu->firstname, temp);
     free(temp);
@@ -146,7 +147,7 @@ student * CreateStudent(){
 
     printf("classification: ");
     temp = AskUserInput();
-    len =strlen(temp);
+    len =strlen(temp) + 1;
     stu->year = (char*) malloc(len);
     strcpy(stu->year, temp);
     free(temp);
@@ -170,7 +171,7 @@ char *AskUserInput(){
     if (fgets(buffer, BUFFERSIZE , stdin) != NULL)
     {
       len = (int) strlen(buffer);
-      buffer[len-1] = '\0';                 // why minus 1 ???
+      buffer[len-1] = '\0';
     }
     return buffer;
 }
