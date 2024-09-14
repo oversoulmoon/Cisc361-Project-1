@@ -25,3 +25,9 @@ $ make tests
 $ ./slist
 ```
 And follow the prompts
+## Options
+1- Add a student (append to list), input last name, first name, id, classification and graduation year. \
+2- Delete all student in list with matching last name, input last name \
+3- Printing all students from first to last\
+4- Print all students from last to first \
+5- exit
